@@ -34,7 +34,7 @@
                             </div>
                         </div>
                         <input type="hidden" name="weight" value="0">
-                        <div class="row">
+                        <div class="row my-2">
                             <div class="col-7">
                                 <button type="submit" class="btn samazon-submit-button w-100">
                                     <i class="fas fa-shopping-cart"></i>
@@ -59,6 +59,26 @@
 
             <div class="offset-1 col-10">
                 <!-- レビューを実装する箇所になります -->
+                <div class="row">
+                    @foreach( $reviews as $review)
+                        <div class="offset-md-5 col-md-5 my-2">
+                            <p class="h3">{{ $review->content }}</p>
+                            <label>{{ $review->created_at }}</label>
+                        </div>
+                    @endforeach
+                </div>
+
+                @auth
+                    <div class="row">
+                        <div class="offset-md-5 col-md-5">
+                            <form action="/products/{{ $product->id }}/reviews" method="POST">
+                                {{ csrf_field() }}
+                                <textarea name="content" class="form-control m-2"></textarea>
+                                <button class="btn samazon-submit-button mx-2">レビューを追加</button>
+                            </form>
+                        </div>
+                    </div>
+                @endauth
             </div>
         </div>
     </div>

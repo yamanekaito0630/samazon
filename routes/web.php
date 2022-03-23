@@ -17,6 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::post('products/{product}/reviews', 'App\Http\Controllers\ReviewController@store');
+
 Route::resource('products', 'App\Http\Controllers\ProductController');
 
 Auth::routes(['verify' => true]);
