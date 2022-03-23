@@ -19,8 +19,8 @@ Route::get('/', function () {
 
 Route::post('products/{product}/reviews', 'App\Http\Controllers\ReviewController@store');
 
+Route::get('products/{product}/favorite', 'App\Http\Controllers\ProductController@favorite')->name('products.favorite');
 Route::resource('products', 'App\Http\Controllers\ProductController');
-
 Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -18,6 +19,19 @@ class ProductController extends Controller
     {
         $products = Product::all();
         return view('products.index', compact('products'));
+    }
+
+    public function favorite(Product $product)
+    {
+        $user = Auth::user();
+
+        if ($user->hasFavorited($product)){
+            $user->unfavorite($product);
+        } else {
+            $user->favorite($product);
+        }
+
+        return redirect()->route('products.show', $product);
     }
 
     /**
