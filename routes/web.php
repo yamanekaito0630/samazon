@@ -21,6 +21,7 @@ Route::get('users/mypage', 'App\Http\Controllers\UserController@mypage')->name('
 Route::get('users/mypage/edit', 'App\Http\Controllers\UserController@edit')->name('mypage.edit');
 Route::get('users/mypage/address/edit', 'App\Http\Controllers\UserController@edit_address')->name('mypage.edit_address');
 Route::put('users/mypage', 'App\Http\Controllers\UserController@update')->name('mypage.update');
+Route::get('users/mypage/favorite', 'App\Http\Controllers\UserController@favorite')->name('mypage.favorite');
 Route::get('users/mypage/password/edit', 'App\Http\Controllers\UserController@edit_password')->name('mypage.edit_password');
 Route::put('users/mypage/password', 'App\Http\Controllers\UserController@update_password')->name('mypage.update_password');
 

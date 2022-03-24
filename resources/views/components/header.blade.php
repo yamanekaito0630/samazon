@@ -52,7 +52,11 @@
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ route('mypage') }}">
-                                <i class="fas fa-user mr-1"></i><label>マイページ</label>
+                                <i class="fas fa-user mx-1"></i><label>マイページ</label>
+                            </a>
+
+                            <a class="dropdown-item" href="{{ route('mypage.favorite') }}">
+                                <i class="far fa-heart mx-1"></i><label>お気に入り</label>
                             </a>
 
                             <a class="dropdown-item" href="{{ route('logout') }}"
