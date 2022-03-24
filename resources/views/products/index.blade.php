@@ -14,7 +14,7 @@
                 <form action="{{ route('products.index') }}" class="d-flex" method="GET">
                     <input type="hidden" name="category" value="{{ $category->id }}">
                     並び替え
-                    <select name="sort" onchange="this.form.submit();" id="" class="d-flex mx-2">
+                    <select name="sort" onchange="this.form.submit();" class="d-flex mx-2">
                         @foreach( $sort as $key => $value )
                             @if( $sorted == $value )
                                 <option value="{{ $value }}" selected>{{ $key }}</option>

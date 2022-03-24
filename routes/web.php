@@ -17,6 +17,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('user/mypage', 'App\Http\Controllers\UserController@mypage')->name('mypage');
+Route::get('user/mypage/edit', 'App\Http\Controllers\UserController@edit')->name('mypage.edit');
+Route::get('user/mypage/address/edit', 'App\Http\Controllers\UserController@edit_address')->name('mypage.edit_address');
+Route::put('user/mypage', 'App\Http\Controllers\UserController@update')->name('mypage.update');
+
 Route::post('products/{product}/reviews', 'App\Http\Controllers\ReviewController@store');
 
 Route::get('products/{product}/favorite', 'App\Http\Controllers\ProductController@favorite')->name('products.favorite');
