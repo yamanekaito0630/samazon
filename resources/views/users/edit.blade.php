@@ -12,7 +12,7 @@
 
                 <hr>
 
-                <form method="POST" action="/user/mypage">
+                <form method="POST" action="/users/mypage">
                     @csrf
                     <input type="hidden" name="_method" value="PUT">
                     <div class="form-group">

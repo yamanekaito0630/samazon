@@ -17,10 +17,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('user/mypage', 'App\Http\Controllers\UserController@mypage')->name('mypage');
-Route::get('user/mypage/edit', 'App\Http\Controllers\UserController@edit')->name('mypage.edit');
-Route::get('user/mypage/address/edit', 'App\Http\Controllers\UserController@edit_address')->name('mypage.edit_address');
-Route::put('user/mypage', 'App\Http\Controllers\UserController@update')->name('mypage.update');
+Route::get('users/mypage', 'App\Http\Controllers\UserController@mypage')->name('mypage');
+Route::get('users/mypage/edit', 'App\Http\Controllers\UserController@edit')->name('mypage.edit');
+Route::get('users/mypage/address/edit', 'App\Http\Controllers\UserController@edit_address')->name('mypage.edit_address');
+Route::put('users/mypage', 'App\Http\Controllers\UserController@update')->name('mypage.update');
+Route::get('users/mypage/password/edit', 'App\Http\Controllers\UserController@edit_password')->name('mypage.edit_password');
+Route::put('users/mypage/password', 'App\Http\Controllers\UserController@update_password')->name('mypage.update_password');
 
 Route::post('products/{product}/reviews', 'App\Http\Controllers\ReviewController@store');
 
