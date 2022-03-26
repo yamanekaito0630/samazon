@@ -13,9 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'App\Http\Controllers\WebController@index');
+Route::get('users/carts', 'App\Http\Controllers\CartController@index')->name('carts.index');
+
+Route::post('users/carts', 'App\Http\Controllers\CartController@store')->name('carts.store');
+
+Route::delete('users/carts', 'App\Http\Controllers\CartController@destroy')->name('carts.destroy');
 
 Route::get('users/mypage', 'App\Http\Controllers\UserController@mypage')->name('mypage');
 Route::get('users/mypage/edit', 'App\Http\Controllers\UserController@edit')->name('mypage.edit');

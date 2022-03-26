@@ -59,6 +59,10 @@
                                 <i class="far fa-heart mx-1"></i><label>お気に入り</label>
                             </a>
 
+                            <a class="dropdown-item" href="{{ route('carts.index') }}">
+                                <i class="fas fa-shopping-cart mx-1"></i><label>カート</label>
+                            </a>
+
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
