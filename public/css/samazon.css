@@ -206,3 +206,11 @@ label {
     background-color: #0fbe9f;
     font-size: 12px;
 }
+
+.review-score-color {
+    color: #0fbe9f;
+}
+
+.review-score-color:focus {
+    color: #0fbe9f;
+}
