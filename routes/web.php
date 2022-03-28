@@ -31,10 +31,22 @@ Route::put('users/mypage/password', 'App\Http\Controllers\UserController@update_
 Route::post('products/{product}/reviews', 'App\Http\Controllers\ReviewController@store');
 
 Route::get('products/{product}/favorite', 'App\Http\Controllers\ProductController@favorite')->name('products.favorite');
-Route::resource('products', 'App\Http\Controllers\ProductController');
+Route::get('products', 'App\Http\Controllers\Dashboard\ProductController@index')->name('products.index');
+Route::get('products/{product}', 'App\Http\Controllers\Dashboard\ProductController@show')->name('products.show');
 Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index')->middleware('auth:admins');
+
+Route::group(['prefix'=>'dashboard', 'as'=>'dashboard.'], function(){
+    Route::get('login', 'App\Http\Controllers\Dashboard\Auth\LoginController@showLoginForm')->name('login');
+    Route::post('login', 'App\Http\Controllers\Dashboard\Auth\LoginController@login')->name('login');
+    Route::resource('major_categories', 'App\Http\Controllers\Dashboard\MajorCategoryController')->middleware('auth:admins');
+    Route::resource('categories', 'App\Http\Controllers\Dashboard\CategoryController')->middleware('auth:admins');
+    Route::resource('products', 'App\Http\Controllers\Dashboard\ProductController')->middleware('auth:admins');
+    Route::resource('users', 'App\Http\Controllers\Dashboard\UserController')->middleware('auth:admins');
+});
 
 if (env('APP_ENV') === 'production') {
     URL::forceScheme('https');
