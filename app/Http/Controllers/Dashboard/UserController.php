@@ -31,10 +31,10 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
-        if ($user->deleted_flag) {
-            $user->deleted_flag=false;
+        if ($user->delete_flag) {
+            $user->delete_flag=false;
         }else{
-            $user->deleted_flag=true;
+            $user->delete_flag=true;
         }
 
         $user->update();

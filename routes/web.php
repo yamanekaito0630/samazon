@@ -27,6 +27,7 @@ Route::put('users/mypage', 'App\Http\Controllers\UserController@update')->name('
 Route::get('users/mypage/favorite', 'App\Http\Controllers\UserController@favorite')->name('mypage.favorite');
 Route::get('users/mypage/password/edit', 'App\Http\Controllers\UserController@edit_password')->name('mypage.edit_password');
 Route::put('users/mypage/password', 'App\Http\Controllers\UserController@update_password')->name('mypage.update_password');
+Route::delete('users/mypage/delete', 'App\Http\Controllers\UserController@destroy')->name('mypage.destroy');
 
 Route::post('products/{product}/reviews', 'App\Http\Controllers\ReviewController@store');
 
@@ -39,7 +40,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index')->middleware('auth:admins');
 
-Route::group(['prefix'=>'dashboard', 'as'=>'dashboard.'], function(){
+Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
     Route::get('login', 'App\Http\Controllers\Dashboard\Auth\LoginController@showLoginForm')->name('login');
     Route::post('login', 'App\Http\Controllers\Dashboard\Auth\LoginController@login')->name('login');
     Route::resource('major_categories', 'App\Http\Controllers\Dashboard\MajorCategoryController')->middleware('auth:admins');

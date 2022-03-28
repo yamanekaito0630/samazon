@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->boolean('deleted_flag')->default(false);
+            $table->boolean('delete_flag')->default(false);
         });
     }
 

@@ -35,7 +35,7 @@
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->phone }}</td>
                         <td>
-                            @if($user->deleted_flag)
+                            @if($user->delete_flag)
                                 <form action="/dashboard/users/{{ $user->id }}" method="POST">
                                     @csrf
                                     <input type="hidden" name="_method" value="DELETE">
