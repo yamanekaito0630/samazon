@@ -34,6 +34,10 @@
                     @endforeach
                 </select>
             </div>
+            <div class="my-4 row">
+                <label for="product-recommend" class="col-3 d-flex justify-content-start">オススメ?</label>
+                <input type="checkbox" name="recommend" id="product-recommend" class="col-1 samazon-check-box">
+            </div>
             <div class="form-inline my-4 row">
                 <label for="product-description" class="col-2 d-flex justify-content-start align-self-start">商品説明</label>
                 <textarea name="description" id="product-description" class="form-control col-8" rows="10"></textarea>

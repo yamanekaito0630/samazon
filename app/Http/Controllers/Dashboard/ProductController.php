@@ -19,27 +19,27 @@ class ProductController extends Controller
         $sort_query = [];
         $sorted = "";
 
-        if ($request->sort !== null){
-            $slices=explode(' ', $request->sort);
-            $sort_query[$slices[0]]=$slices[1];
-            $sorted=$request->sort;
+        if ($request->sort !== null) {
+            $slices = explode(' ', $request->sort);
+            $sort_query[$slices[0]] = $slices[1];
+            $sorted = $request->sort;
         }
 
-        if ($request->keyword !== null){
-            $keyword=rtrim($request->keyword);
-            $total_count=Product::where('name', 'like', "%{$keyword}%")->orwhere('id', "{$keyword}")->count();
-            $products=Product::where('name', 'like', "%{$keyword}%")->orwhere('id', "{$keyword}")->sortable($sort_query)->paginate(15);
-        }else{
-            $keyword="";
-            $total_count=Product::count();
-            $products=Product::sortable($sort_query)->paginate(15);
+        if ($request->keyword !== null) {
+            $keyword = rtrim($request->keyword);
+            $total_count = Product::where('name', 'like', "%{$keyword}%")->orwhere('id', "{$keyword}")->count();
+            $products = Product::where('name', 'like', "%{$keyword}%")->orwhere('id', "{$keyword}")->sortable($sort_query)->paginate(15);
+        } else {
+            $keyword = "";
+            $total_count = Product::count();
+            $products = Product::sortable($sort_query)->paginate(15);
         }
 
-        $sort=[
-            '価格の安い順'=>'price asc',
-            '価格の高い順'=>'price desc',
-            '出品の古い順'=>'updated_at asc',
-            '出品の新しい順'=>'updated_at desc'
+        $sort = [
+            '価格の安い順' => 'price asc',
+            '価格の高い順' => 'price desc',
+            '出品の古い順' => 'updated_at asc',
+            '出品の新しい順' => 'updated_at desc'
         ];
 
         return view('dashboard.products.index', compact('products', 'sort', 'sorted', 'total_count', 'keyword'));
@@ -60,27 +60,32 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $request->validate([
-            'name'=>'required',
-            'price'=>'required',
-            'description'=>'required',
+            'name' => 'required',
+            'price' => 'required',
+            'description' => 'required',
         ],
-        [
-            'name.required'=>'商品名は必須です。',
-            'price.required'=>'価格は必須です。',
-            'description.required'=>'商品説明は必須です。',
-        ]);
+            [
+                'name.required' => '商品名は必須です。',
+                'price.required' => '価格は必須です。',
+                'description.required' => '商品説明は必須です。',
+            ]);
 
-        $product=new Product();
-        $product->name=$request->input('name');
-        $product->description=$request->input('description');
-        $product->price=$request->input('price');
-        $product->category_id=$request->input('category_id');
+        $product = new Product();
+        $product->name = $request->input('name');
+        $product->description = $request->input('description');
+        $product->price = $request->input('price');
+        $product->category_id = $request->input('category_id');
+        if ($request->input('recommend') == 'on') {
+            $product->recommend_flag = true;
+        } else {
+            $product->recommend_flag = false;
+        }
         $product->save();
 
         return redirect()->route('dashboard.products.index');
@@ -89,12 +94,12 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Product $product
+     * @param \App\Models\Product $product
      * @return \Illuminate\Http\Response
      */
     public function edit(Product $product)
     {
-        $categories=Category::all();
+        $categories = Category::all();
 
         return view('dashboard.products.edit', compact('product', 'categories'));
     }
@@ -102,27 +107,32 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product $product
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Product $product
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Product $product)
     {
         $request->validate([
-            'name'=>'required',
-            'price'=>'required',
-            'description'=>'required',
+            'name' => 'required',
+            'price' => 'required',
+            'description' => 'required',
         ],
             [
-                'name.required'=>'商品名は必須です。',
-                'price.required'=>'価格は必須です。',
-                'description.required'=>'商品説明は必須です。',
+                'name.required' => '商品名は必須です。',
+                'price.required' => '価格は必須です。',
+                'description.required' => '商品説明は必須です。',
             ]);
 
-        $product->name=$request->input('name');
-        $product->description=$request->input('description');
-        $product->price=$request->input('price');
-        $product->category_id=$request->input('category_id');
+        $product->name = $request->input('name');
+        $product->description = $request->input('description');
+        $product->price = $request->input('price');
+        $product->category_id = $request->input('category_id');
+        if ($request->input('recommend') == 'on') {
+            $product->recommend_flag = true;
+        } else {
+            $product->recommend_flag = false;
+        }
         $product->update();
 
         return redirect()->route('dashboard.products.index');
@@ -131,7 +141,7 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Product $product
+     * @param \App\Models\Product $product
      * @return \Illuminate\Http\Response
      */
     public function destroy(Product $product)
