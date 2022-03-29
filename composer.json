@@ -13,6 +13,7 @@
         "laravel/sanctum": "^2.14.1",
         "laravel/tinker": "^2.7",
         "laravel/ui": "^3.4",
+        "nesbot/carbon": "^2.57",
         "overtrue/laravel-favorite": "^5.0"
     },
     "require-dev": {
