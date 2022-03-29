@@ -31,13 +31,18 @@
                         <h3 class="my-4">{{ $product->name }}</h3>
                     </div>
                     <div class="col-md-2">
-                        <h3 class="w-100 my-4">{{ $product->qty }}</h3>
+                        <h3 class="w-100 mt-4">{{$product->qty}}</h3>
                     </div>
                     <div class="col-md-2">
-                        <h3 class="w-100 my-4">￥{{ $product->qty * $product->price }}</h3>
+                        @if ($product->options->carriage)
+                            <h3 class="w-100 mt-4">￥{{$product->qty * ($product->price + env('CARRIAGE'))}}</h3>
+                        @else
+                            <h3 class="w-100 mt-4">￥{{$product->qty * $product->price}}</h3>
+                        @endif
                     </div>
                 @endforeach
             </div>
+
 
             <hr>
 
@@ -62,12 +67,17 @@
                     買い物を続ける
                 </a>
                 @if( $total > 0 )
-                    <div class="btn samazon-submit-button" data-bs-toggle="modal" data-bs-target="#buy-confirm-modal">購入を確定する</div>
+                    <div class="btn samazon-submit-button" data-bs-toggle="modal" data-bs-target="#buy-confirm-modal">
+                        購入を確定する
+                    </div>
                 @else
-                    <div class="btn samazon-submit-button disabled" data-bs-toggle="modal" data-bs-target="#buy-confirm-modal">購入を確定する</div>
+                    <div class="btn samazon-submit-button disabled" data-bs-toggle="modal"
+                         data-bs-target="#buy-confirm-modal">購入を確定する
+                    </div>
                 @endif
 
-                <div class="modal fade" id="buy-confirm-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal fade" id="buy-confirm-modal" data-bs-backdrop="static" data-bs-keyboard="false"
+                     tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -77,7 +87,9 @@
                                 </button>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn samazon-favorite-button border-dark text-dark" data-bs-dismiss="modal">閉じる</button>
+                                <button type="button" class="btn samazon-favorite-button border-dark text-dark"
+                                        data-bs-dismiss="modal">閉じる
+                                </button>
                                 <button type="submit" class="btn samazon-submit-button">購入</button>
                             </div>
                         </div>

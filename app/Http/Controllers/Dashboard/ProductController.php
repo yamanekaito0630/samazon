@@ -6,6 +6,9 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use App\Imports\ProductsImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
 {
@@ -86,6 +89,17 @@ class ProductController extends Controller
         } else {
             $product->recommend_flag = false;
         }
+        if ($request->file('image') !== null) {
+            $image = $request->file('image')->store('public/products');
+            $product->image = basename($image);
+        } else {
+            $product->image = '';
+        }
+        if ($request->input('carriage' == 'on')) {
+            $product->carriage_flag = true;
+        } else {
+            $product->carriage_flag = false;
+        }
         $product->save();
 
         return redirect()->route('dashboard.products.index');
@@ -133,6 +147,19 @@ class ProductController extends Controller
         } else {
             $product->recommend_flag = false;
         }
+        if ($request->hasFile('image')) {
+            $image = $request->file('image')->store('public/products');
+            $product->image = basename($image);
+        } else if (isset($product->image)) {
+            // do nothind
+        } else {
+            $product->image = '';
+        }
+        if ($request->input('carriage') == 'on') {
+            $product->carriage_flag = true;
+        } else {
+            $product->carriage_flag = false;
+        }
         $product->update();
 
         return redirect()->route('dashboard.products.index');
@@ -149,5 +176,19 @@ class ProductController extends Controller
         $product->delete();
 
         return redirect()->route('dashboard.products.index');
+    }
+
+    public function import(Product $product)
+    {
+        return view('dashboard.products.import');
+    }
+
+    public function import_csv(Request $request)
+    {
+        if ($request->hasFile('csv')) {
+            Excel::import(new ProductsImport, $request->file('csv'));
+            return redirect()->route('dashboard.products.import_csv')->with('flash_message', 'CSVでの一括登録が成功しました!');
+        }
+        return redirect()->route('dashboard.products.import_csv')->with('flash_message', 'CSVが追加されていません。CSVを追加してください。');
     }
 }

@@ -1,7 +1,9 @@
 <div class="container ml-3">
     <h2>受注管理</h2>
     <div class="d-flex flex-column">
-        <label class="samazon-sidebar-category-label my-1">受注一覧</label>
+        <label class="samazon-sidebar-category-label my-1">
+            <a href="/dashboard/orders">受注一覧</a>
+        </label>
     </div>
 
     <h2 class="mt-2">商品管理</h2>
@@ -15,7 +17,9 @@
         <label class="samazon-sidebar-category-label my-1">
             <a href="/dashboard/categories">カテゴリ管理</a>
         </label>
-        <label class="samazon-sidebar-category-label my-1">CSV一括登録</label>
+        <label class="samazon-sidebar-category-label my-1">
+            <a href="/dashboard/products/import/csv">CSV一括登録</a>
+        </label>
     </div>
 
     <h2 class="mt-2">顧客管理</h2>

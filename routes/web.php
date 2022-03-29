@@ -29,11 +29,14 @@ Route::get('users/mypage/password/edit', 'App\Http\Controllers\UserController@ed
 Route::put('users/mypage/password', 'App\Http\Controllers\UserController@update_password')->name('mypage.update_password');
 Route::delete('users/mypage/delete', 'App\Http\Controllers\UserController@destroy')->name('mypage.destroy');
 
+Route::resource('products', 'App\Http\Controllers\ProductController@index');
+
 Route::post('products/{product}/reviews', 'App\Http\Controllers\ReviewController@store');
 
 Route::get('products/{product}/favorite', 'App\Http\Controllers\ProductController@favorite')->name('products.favorite');
-Route::get('products', 'App\Http\Controllers\Dashboard\ProductController@index')->name('products.index');
-Route::get('products/{product}', 'App\Http\Controllers\Dashboard\ProductController@show')->name('products.show');
+Route::get('products', 'App\Http\Controllers\ProductController@index')->name('products.index');
+Route::get('products/{product}', 'App\Http\Controllers\ProductController@show')->name('products.show');
+Route::get('products/create', 'App\Http\Controllers\ProductController@create')->name('products.create');
 Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -47,6 +50,9 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
     Route::resource('categories', 'App\Http\Controllers\Dashboard\CategoryController')->middleware('auth:admins');
     Route::resource('products', 'App\Http\Controllers\Dashboard\ProductController')->middleware('auth:admins');
     Route::resource('users', 'App\Http\Controllers\Dashboard\UserController')->middleware('auth:admins');
+    Route::get('orders', 'App\Http\Controllers\Dashboard\OrderController@index')->middleware('auth:admins');
+    Route::get('products/import/csv', 'App\Http\Controllers\Dashboard\ProductController@import')->name('products.import_csv')->middleware('auth:admins');
+    Route::post('products/import/csv', 'App\Http\Controllers\Dashboard\ProductController@import_csv')->middleware('auth:admins');
 });
 
 if (env('APP_ENV') === 'production') {
