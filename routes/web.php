@@ -59,6 +59,10 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
     Route::get('orders', 'App\Http\Controllers\Dashboard\OrderController@index')->middleware('auth:admins');
     Route::get('products/import/csv', 'App\Http\Controllers\Dashboard\ProductController@import')->name('products.import_csv')->middleware('auth:admins');
     Route::post('products/import/csv', 'App\Http\Controllers\Dashboard\ProductController@import_csv')->middleware('auth:admins');
+
+    if (env('APP_ENV') === 'production') {
+        URL::forceScheme('https');
+    }
 });
 
 if (env('APP_ENV') === 'production') {
