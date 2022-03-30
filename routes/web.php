@@ -29,6 +29,12 @@ Route::get('users/mypage/password/edit', 'App\Http\Controllers\UserController@ed
 Route::put('users/mypage/password', 'App\Http\Controllers\UserController@update_password')->name('mypage.update_password');
 Route::delete('users/mypage/delete', 'App\Http\Controllers\UserController@destroy')->name('mypage.destroy');
 
+Route::get('users/mypage/register_card', 'App\Http\Controllers\UserController@register_card')->name('mypage.register_card');
+Route::post('users/mypage/token', 'App\Http\Controllers\UserController@token')->name('mypage.token');
+
+Route::get('users/mypage/cart_history', 'App\Http\Controllers\UserController@cart_history_index')->name('mypage.cart_history');
+Route::get('users/mypage/cart_history/{num}', 'App\Http\Controllers\UserController@cart_history_show')->name('mypage.cart_history_show');
+
 Route::resource('products', 'App\Http\Controllers\ProductController@index');
 
 Route::post('products/{product}/reviews', 'App\Http\Controllers\ReviewController@store');

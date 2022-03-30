@@ -8,7 +8,7 @@
                 @if ($product->image !== null)
                     <img src="{{ asset('storage/products/'.$product->image) }}" class="w-100 img-fluid">
                 @else
-                    <img src="{{ asset('img/dummy.png')}}" class="w-100 img-fuild">
+                    <img src="{{ asset('img/dummy.png')}}" class="w-100 img-fluid">
                 @endif
             </div>
             <div class="col">
