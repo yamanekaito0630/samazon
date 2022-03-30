@@ -10,7 +10,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js', true) }}" defer></script>
     <script src="https://kit.fontawesome.com/85786d5dac.js" crossorigin="anonymous"></script>
 
     <!-- Fonts -->
@@ -18,8 +18,8 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/samazon.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/app.css', true) }}" rel="stylesheet">
+    <link href="{{ asset('css/samazon.css', true)}}" rel="stylesheet">
 </head>
 <body>
 <div id="app">
