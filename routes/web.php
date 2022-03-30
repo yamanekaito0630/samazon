@@ -41,6 +41,7 @@ Route::post('products/{product}/reviews', 'App\Http\Controllers\ReviewController
 
 Route::get('products/{product}/favorite', 'App\Http\Controllers\ProductController@favorite')->name('products.favorite');
 Route::get('products', 'App\Http\Controllers\ProductController@index')->name('products.index');
+Route::post('products', 'App\Http\Controllers\ProductController@store');
 Route::get('products/{product}', 'App\Http\Controllers\ProductController@show')->name('products.show');
 Route::get('products/create', 'App\Http\Controllers\ProductController@create')->name('products.create');
 Auth::routes(['verify' => true]);

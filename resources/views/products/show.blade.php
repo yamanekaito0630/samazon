@@ -5,7 +5,7 @@
     <div class="d-flex justify-content-center">
         <div class="row w-75">
             <div class="col-5 offset-1">
-                @if ($product->image !== null)
+                @if ($product->image !== "")
                     <img src="{{ asset('storage/products/'.$product->image) }}" class="w-100 img-fluid">
                 @else
                     <img src="{{ asset('img/dummy.png')}}" class="w-100 img-fluid">
